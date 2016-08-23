@@ -1,13 +1,17 @@
 require 'oystercard'
 
 describe Oystercard do
-
+  let(:journey) {{entry_station: entry_station, exit_station: exit_station}}
   subject(:oystercard) { described_class.new }
+  let(:entry_station){double :entry_station}
+  let(:exit_station){double :exit_station}
   let(:station){ double :station }
 
   it 'tests a freshly initialized card has balance of zero' do
     expect(oystercard.instance_variable_get(:@balance)).to eq 0
   end
+
+
 
   describe 'deducting fare' do
 
@@ -44,22 +48,27 @@ describe Oystercard do
   describe 'test checking and change of in_journey status' do
     before do
       oystercard.top_up(Oystercard::MAXIMUM_BALANCE)
-      oystercard.touch_in(station)
+      oystercard.touch_in(entry_station)
     end
 
     it 'touching in changes in_journey status to true' do
       expect(oystercard.in_journey?).to be true
     end
     it 'touching out (after having touched in) changes in_journey to false' do
-      oystercard.touch_out(rand)
+      oystercard.touch_out(station)
       expect(oystercard.in_journey?).to be false
     end
     it 'expects card to remember entry station' do
-      expect(oystercard.entry_station).to eq station
+      expect(oystercard.entry_station).to eq entry_station
     end
     it 'expects the card to forget entry station after touch out' do
-      oystercard.touch_out(rand)
+      oystercard.touch_out(station)
       expect(oystercard.entry_station).to eq nil
+    end
+
+    it 'can record a journey ' do
+      oystercard.touch_out(exit_station)
+      expect(oystercard.journey_history).to include(journey)
     end
   end
 
