@@ -1,3 +1,5 @@
+require 'journey'
+
 class Oystercard
 attr_reader :entry_station
 attr_reader :journey_history
@@ -11,7 +13,6 @@ MINIMUM_BALANCE = 1
     @min = MINIMUM_BALANCE
     @mininum_fare = 1
     @entry_station = nil
-
     @journey_history = []
   end
 
@@ -26,6 +27,7 @@ MINIMUM_BALANCE = 1
 
   def touch_in(station)
     fail "Minimum balance required" if @balance < @min
+    @journey = Journey.new(station)
     @entry_station = station
   end
 
