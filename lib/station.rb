@@ -1,7 +1,8 @@
 class Station
 
-def initialize(station, zone)
-  @station = station
-  @zone = zone
-end
+  def initialize(name, zone)
+    @name = name
+    @zone = zone
+  end
+
 end
