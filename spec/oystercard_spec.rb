@@ -113,9 +113,9 @@ describe Oystercard do
       oystercard.touch_out(exit_station)
       expect(oystercard.journeys).to include journey
     end
-
-    context 'when not in journey'
-    it 'does not allow touch out'
+    # 
+    # context 'when not in journey'
+    # it 'does not allow touch out'
     end
   end
 end
