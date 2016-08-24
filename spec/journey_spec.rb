@@ -28,8 +28,6 @@ describe Journey do
   end
 
   it 'charges penalty if no journey was started' do
-    journey.start_check
-    journey.finish_check
     expect(journey.finish_check).to eq Journey::PENALTY
   end
 
@@ -42,6 +40,7 @@ describe Journey do
   end
 
   it 'can complete a journey' do
+    journey.start_check
     expect(journey.finish_check).to eq true
   end
 

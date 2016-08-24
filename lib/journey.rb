@@ -36,13 +36,13 @@ class Journey
   end
 
   def finish_check(exit = EXIT)
-    if @complete == true
+      @exit = exit
+    if @complete.nil?
       PENALTY
     else
       MINIMUM_FARE
+      @complete = true
     end
-    @exit = exit
-    @complete = true
   end
 
 end
