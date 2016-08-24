@@ -1,7 +1,6 @@
 class Journey
 
-  attr_reader :start, :journey
-  attr_reader :complete
+  attr_reader :start, :journey, :complete
 
   START = 'start'
   EXIT = 'end'
@@ -11,9 +10,24 @@ class Journey
   def initialize(start = START)
     @start = start
     @journey = {entry: @start , exit: @exit}
-
     @exit = nil
   end
+
+  # def start_check
+  #   if !@start.nil?
+  #     @start = start
+  #     PENALTY
+  #   else
+  #     @start = start
+  #   end
+  #
+  # def end_check
+  #   if @start.nil?
+  #     PENALTY
+  #   else
+  #     MINIMUM_FARE
+  #   end
+
 
   def start_check
     if @complete == false
@@ -25,6 +39,11 @@ class Journey
 
   def complete?
     @complete
+    # if !@start.nil? && !@exit.nil?
+    #   true
+    # else
+    #   false
+    # end
   end
 
   def pen_fare
@@ -40,8 +59,8 @@ class Journey
     if @complete.nil?
       PENALTY
     else
-      MINIMUM_FARE
       @complete = true
+      MINIMUM_FARE
     end
   end
 
